@@ -19,7 +19,9 @@ COPY ./src ./src
 COPY ./public ./public
 COPY ./prisma ./prisma
 COPY ./manager ./manager
-# COPY ./.env.example ./.env
+COPY ./.env.example ./.env
+RUN sed -i "s|# DATABASE_CONNECTION_URI=.*|DATABASE_CONNECTION_URI=${DATABASE_CONNECTION_URI}|" .env
+RUN sed -i "s|# CACHE_REDIS_URI=.*|CACHE_REDIS_URI=${CACHE_REDIS_URI}|" .env
 COPY ./runWithProvider.js ./
 
 COPY ./Docker ./Docker
